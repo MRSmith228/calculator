@@ -11,7 +11,7 @@ class Program
 
         if (parts.Length < 3)
         {
-            Console.WriteLine("Ошибка: введите выражение через пробелы.");
+            Console.WriteLine("Ошибка");
             return;
         }
         double a = double.Parse(parts[0]);
