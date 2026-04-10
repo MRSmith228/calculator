@@ -1,48 +1,49 @@
 using System;
+using System.Linq.Expressions;
 
 class Program
 {
     static void Main()
     {
-        Console.Write("Введите выражение: ");
-        string input = Console.ReadLine();
-
-        string[] parts = input.Split(' ');
-
-        if (parts.Length < 3)
+        while (true)
         {
-            Console.WriteLine("Ошибка");
-            return;
-        }
-        double a = double.Parse(parts[0]);
-        string deistvie = parts[1];
-        double b = double.Parse(parts[2]);
-        if (deistvie == "+")
-        {
-            Console.WriteLine(a + b);
-        }
-        if (deistvie == "-")
-        {
-            Console.WriteLine(a - b);
-        }
-        if (deistvie == "*")
-        {
-            Console.WriteLine(a * b);
-        }
-        if (deistvie == "/")
-        {
-            if (b == 0)
+            Console.Write("Введите выражение: ");
+            string input = Console.ReadLine();
+            string[] parts = input.Split(' ');
+            bool c = double.TryParse(parts[0], out double a);
+            string deistvie = parts[1];
+            bool d = double.TryParse(parts[2], out double b);
+            if (!c || !d)
             {
-                Console.WriteLine("Нельзя делить на ноль!");
-                return;
+                Console.WriteLine("Значение для выражения должно иметь только циферные значение.");
+                continue;
             }
-            Console.WriteLine(a * b);
+            if (deistvie == "+")
+            {
+                Console.WriteLine(a + b);
+            }
+            if (deistvie == "-")
+            {
+                Console.WriteLine(a - b);
+            }
+            if (deistvie == "*")
+            {
+                Console.WriteLine(a * b);
+            }
+            if (deistvie == "/")
+            {
+                if (b == 0)
+                {
+                    Console.WriteLine("Нельзя делить на ноль!");
+                    return;
+                }
+                Console.WriteLine(a * b);
+            }
+            if (deistvie == "^")
+            {
+                Console.WriteLine(Math.Pow(a, b));
+            }
+            Console.ReadKey();
         }
-
-        if (deistvie == "^")
-        {
-            Console.WriteLine(Math.Pow(a,b));
-        }
-        Console.ReadKey();
     }
 }
