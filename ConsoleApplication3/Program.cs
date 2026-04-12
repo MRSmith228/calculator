@@ -13,6 +13,7 @@ class Program
             var x = input.IndexOfAny(deistvie);
             if (x == -1)
             {
+                Console.WriteLine("Что-то не так");
                 continue;
             }
             string[] parts = input.Split(deistvie);
