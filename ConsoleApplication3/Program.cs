@@ -1,5 +1,4 @@
 using System;
-using System.Linq.Expressions;
 
 class Program
 {
@@ -8,42 +7,49 @@ class Program
         while (true)
         {
             Console.Write("Введите выражение: ");
-            string input = Console.ReadLine();
-            string[] parts = input.Split(' ');
-            bool c = double.TryParse(parts[0], out double a);
-            string deistvie = parts[1];
-            bool d = double.TryParse(parts[2], out double b);
-            if (!c || !d)
+            char[] deistvie = { '+', '-', '*', '^', '/' };
+            string input = Console.ReadLine().Replace(" ", "");
+            input.IndexOfAny(deistvie);
+            var x = input.IndexOfAny(deistvie);
+            if (x == -1)
             {
-                Console.WriteLine("Значение для выражения должно иметь только циферные значение.");
                 continue;
             }
-            if (deistvie == "+")
+            string[] parts = input.Split(deistvie);
+            char xui = input[x];
+            if (double.TryParse(parts[0], out double a) & double.TryParse(parts[1], out double b))
             {
-                Console.WriteLine(a + b);
-            }
-            if (deistvie == "-")
-            {
-                Console.WriteLine(a - b);
-            }
-            if (deistvie == "*")
-            {
-                Console.WriteLine(a * b);
-            }
-            if (deistvie == "/")
-            {
-                if (b == 0)
+                if (xui == '+')
                 {
-                    Console.WriteLine("Нельзя делить на ноль!");
-                    return;
+                    Console.WriteLine(a + b);
                 }
-                Console.WriteLine(a * b);
+                if (xui == '-')
+                {
+                    Console.WriteLine(a - b);
+                }
+                if (xui == '*')
+                {
+                    Console.WriteLine(a * b);
+                }
+                if (xui == '/' )
+                {
+                    if (b == 0)
+                    {
+                        Console.WriteLine("Нельзя делить на ноль!");
+                        continue;
+                    }
+                    Console.WriteLine(a / b);
+                }
+                if (xui == '^')
+                {
+                    Console.WriteLine(Math.Pow(a, b));
+                }
             }
-            if (deistvie == "^")
+            else
             {
-                Console.WriteLine(Math.Pow(a, b));
+                Console.WriteLine("Что-то пошло не так");
+                continue;
             }
-            Console.ReadKey();
         }
     }
 }
