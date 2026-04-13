@@ -16,9 +16,10 @@ class Program
                 Console.WriteLine("Что-то не так");
                 continue;
             }
-            string[] parts = input.Split(deistvie);
             char xui = input[x];
-            if (double.TryParse(parts[0], out double a) & double.TryParse(parts[1], out double b))
+            string c = input.Substring(0,x);
+            string d = input.Substring(x + 1, input.Length - x - 1);
+            if (double.TryParse(c, out double a) & double.TryParse(d, out double b))
             {
                 if (xui == '+')
                 {
